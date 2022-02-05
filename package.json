@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "nodemon main.js",
+    "generate-secret-jwt": "node src/config/generate-jwt-secret.js",
     "test": "test"
   },
   "repository": {
@@ -26,8 +27,11 @@
   "homepage": "https://github.com/iamc1oud/Canary#readme",
   "dependencies": {
     "async": "^3.2.3",
+    "bcrypt": "^5.0.1",
     "express": "^4.17.2",
+    "express-form-data": "^2.0.17",
     "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.3.1",
     "mongoose": "^6.2.0",
     "nodemon": "^2.0.15",
