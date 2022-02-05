@@ -1,17 +1,39 @@
-const _ = require('lodash');
 
-console.time();
-_.map([1, 2, 3], (n) => console.log(n * 2));
-console.timeEnd();
+const portUsed = require('port-used');
 
-console.time();
-[1, 2, 3].map((n) => console.log(n * 2));
-console.timeEnd();
+const express = require('express');
 
-console.time('lodash');
-console.log(_.defaults({ 'a': 1 }, { 'a': 3, 'b': 2 }));
-console.timeEnd('lodash');
+const { PORT, NODE_ENV } = process.env;
+const port = Number(PORT) || 3000;
 
-console.time('Javascript');
-console.log({ 'a': 1 }, { 'a': 3, 'b': 2 });
-console.timeEnd('Javascript');
+async function main() {
+    if (NODE_ENV !== 'production') {
+        await checkPortAvailability();
+    }
+
+    await startServer();
+}
+
+async function checkPortAvailability() {
+    // Check that the development server is not already running
+    const portInUse = await portUsed.check(port);
+
+    if (portInUse) {
+        console.log(`\nPort ${port} is not available. You may already have a server running.`);
+        console.log(
+            `Try running \`npx kill-port ${port}\` to shut down all your running node processes.\n`
+        );
+        console.log('\x07'); // system 'beep' sound
+        process.exit(1);
+    }
+}
+
+async function startServer() {
+    const app = express();
+
+    app.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+    });
+}
+
+main();
