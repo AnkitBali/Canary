@@ -27,6 +27,10 @@ const config = {
         algorithm: 'HS256',
         issuer: 'canary'
     },
+    roles: {
+        admin: 'admin',
+        user: 'user'
+    }
 }
 
 module.exports = config;

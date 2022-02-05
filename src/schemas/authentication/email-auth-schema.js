@@ -4,6 +4,7 @@ const EmailAuthSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
+        default: null
     },
     //TODO: Add 2 step verification later
     email: {

@@ -15,4 +15,8 @@ router.post('/signup', body('email').isEmail(), body('password').isStrongPasswor
     minUppercase: 1,
 }), EmailAuthController.EmailSignUp);
 
+router.post('/login', body('email').isEmail(), body('password').notEmpty(), EmailAuthController.EmailLogin);
+
+router.post('/complete-profile', SecuredRoute, EmailAuthController.CompleteProfile);
+
 module.exports = router;

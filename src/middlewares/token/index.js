@@ -24,11 +24,18 @@ class TokenMiddleware {
 
     // Verify the jwt token with payload
     verify(token) {
-        return jwt.verify(token, config.jwt.secret, {
-            expiresIn: config.jwt.expiresIn,
-            algorithm: config.jwt.algorithm,
-            issuer: config.jwt.issuer,
-        });
+        try {
+            const decoded = jwt.verify(token, config.jwt.secret, {
+                expiresIn: config.jwt.expiresIn,
+                algorithm: config.jwt.algorithm,
+                issuer: config.jwt.issuer,
+            });
+
+            return decoded;
+        } catch (e) {
+            return false;
+        }
+
     }
 }
 
