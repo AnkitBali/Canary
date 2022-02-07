@@ -5,7 +5,7 @@ const EmailAuthController = require('../../../controllers/authentication/email-a
 const { body } = require('express-validator');
 
 // Guard middleware
-const { AdminRoute, SecuredRoute } = require('../../../middlewares/guard-routes.js');
+const { SecuredRoute } = require('../../../middlewares/guard-routes.js');
 
 const router = require('express').Router();
 
